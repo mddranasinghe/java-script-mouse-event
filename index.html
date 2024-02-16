@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mouse Events Example</title>
+<style>
+    #box {
+        width: 500px;
+        height: 500px;
+        background-color: blue;
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        transform: translate(-50%, -50%);
+    }
+    #coordinates {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+    }
+	  #coordinates1 {
+        position: fixed;
+        top: 90px;
+        left: 90px;
+    }
+</style>
+</head>
+<body>
+
+<div id="box"></div>
+<div id="coordinates"></div>
+<div id="coordinates1">ddddddddd</div>
+
+<script>
+    // Get a reference to the box element
+    var box = document.getElementById('box');
+    var coordinatesDisplay = document.getElementById('coordinates');
+	var coordinatesDisplay1 = document.getElementById('coordinates1');
+
+    // Variables to store starting and ending x-coordinates
+    var startX = 0;
+    var endX = 0;
+
+   box.addEventListener('touchstart', function(event) {
+        // Capture starting x-coordinate when touch starts
+        startX = event.touches[0].clientX - window.innerWidth / 2;
+    });
+
+    box.addEventListener('touchmove', function(event) {
+        // Update ending x-coordinate when touch is moved
+        endX = event.touches[0].clientX - window.innerWidth / 2;
+
+        // Update coordinates display
+        coordinatesDisplay.textContent = 'Start X: ' + startX + ', End X: ' + endX;
+		
+	if(endX > startX)
+	{
+	coordinatesDisplay1.textContent = endX+'++++++++++++++++';
+	
+	location.href="f.html";
+	}
+	 if(endX < startX)
+	{
+	coordinatesDisplay1.textContent = endX+'---------------';
+	
+	}
+    });
+	
+	
+	
+	</script>
+
+</body>
+</html>
