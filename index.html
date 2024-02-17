@@ -3,68 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mouse Movement Detection</title>
+<title>Touch Screen Navigation</title>
 <style>
     body {
-        height: 1000px; /* Just for demonstration purpose to make scrolling possible */
+        margin: 0;
+        padding: 0;
     }
-    #movementDirection {
+    #navbar {
         position: fixed;
-        top: 10px;
-        left: 10px;
-        background-color: rgba(0, 0, 0, 0.5);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background-color: #333;
         color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+    #navbar a {
+        color: white;
+        text-decoration: none;
         padding: 10px;
-        border-radius: 5px;
+    }
+    #content {
+        padding-top: 50px; /* Adjust content position to avoid overlap with navbar */
+        text-align: center;
     }
 </style>
 </head>
 <body>
 
-<h1>Mouse Movement Detection Demo</h1>
-<p>Move your mouse to see movement direction.</p>
+<div id="navbar">
+    <a href="h.html" id="prevPage">Previous</a>
+    <span>Swipe left or right</span>
+    <a href="f.html" id="nextPage">Next</a>
+</div>
 
-<div id="movementDirection"></div>
+<div id="content">
+    <h1>Current Page</h1>
+    <p>Swipe left or right on the navigation bar to navigate between pages.</p>
+</div>
 
 <script>
-var lastX = 0;
-var lastY = 0;
+var startX = 0;
 
-window.addEventListener('touchmove', function(event) {
-    var currentX = event.touches[0].clientX;
-    var currentY =  event.touches[0].clientY;
-    var movementDirection = document.getElementById('movementDirection');
+window.addEventListener('touchstart', function(event) {
+    startX = event.touches[0].clientX;
+});
 
-   /* if (currentX - lastX >= 100) {
-        movementDirection.textContent = 'Mouse moving from left to right';
-		  location.href = "f.html";
-		  }
-   else if(lastX - currentX >= 100)
-   {
-     movementDirection.textContent = 'Mouse moving from left to right';
-		  location.href = "h.html";
-   }*/
+window.addEventListener('touchend', function(event) {
+    var endX = event.changedTouches[0].clientX;
+    var threshold = 50; // Minimum distance required to trigger navigation (in pixels)
 
-
-
-
-
-
-  if (currentY > lastY) {
-        movementDirection.textContent = 'Mouse moving from top to bottom';
-    } else if (currentY < lastY) {
-        movementDirection.textContent = 'Mouse moving from bottom to top';
-    } else if (currentX > lastX) {
-        movementDirection.textContent = 'Mouse moving from left to right';
-		location.href = "f.html";
-    } else if (currentX < lastX) {
-        movementDirection.textContent = 'Mouse moving from right to left';
-		location.href = "h.html";
+    if (startX - endX > threshold) {
+        // Swipe from right to left
+        var nextPageLink = document.getElementById('nextPage').href;
+        if (nextPageLink) {
+            window.location.href = nextPageLink;
+        }
+    } else if (endX - startX > threshold) {
+        // Swipe from left to right
+        var prevPageLink = document.getElementById('prevPage').href;
+        if (prevPageLink) {
+            window.location.href = prevPageLink;
+        }
     }
-
-
-    lastX = currentX;
-    lastY = currentY;
 });
 </script>
 
