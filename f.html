@@ -42,14 +42,15 @@
     var startX = 0;
     var endX = 0;
 
- box.addEventListener('touchstart', function(event) {
-        // Capture starting x-coordinate when touch starts
-        startX = event.touches[0].clientX - window.innerWidth / 2;
+    // Add event listeners for mouse events
+    box.addEventListener('touchstart', function(event) {
+        // Capture starting x-coordinate when mouse button is pressed down
+        startX = event.clientX - window.innerWidth / 2;
     });
 
     box.addEventListener('touchmove', function(event) {
-        // Update ending x-coordinate when touch is moved
-        endX = event.touches[0].clientX - window.innerWidth / 2;
+        // Update ending x-coordinate when mouse is moved
+        endX = event.clientX - window.innerWidth / 2;
 
         // Update coordinates display
         coordinatesDisplay.textContent = 'Start X: ' + startX + ', End X: ' + endX;
@@ -58,12 +59,12 @@
 	{
 	coordinatesDisplay1.textContent = endX+'++++++++++++++++';
 	
-	
+	location.href="d.html";
 	}
 	if(endX < startX)
 	{
 	coordinatesDisplay1.textContent = endX+'---------------';
-	location.href="index.html";
+	location.href="d.html";
 	}
     });
 	

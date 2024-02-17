@@ -6,12 +6,12 @@
 <title>Mouse Events Example</title>
 <style>
     #box {
-        width: 100px;
-        height: 100px;
-        background-color: blue;
+        width: 500px;
+        height: 500px;
+        background-color: black;
         position: absolute;
         top: 50%;
-        left: 50%;
+        left: 0%;
         transform: translate(-50%, -50%);
     }
     #coordinates {
@@ -19,17 +19,24 @@
         top: 10px;
         left: 10px;
     }
+	  #coordinates1 {
+        position: fixed;
+        top: 90px;
+        left: 90px;
+    }
 </style>
 </head>
 <body>
 
 <div id="box"></div>
 <div id="coordinates"></div>
+<div id="coordinates1">ddddddddd</div>
 
 <script>
     // Get a reference to the box element
     var box = document.getElementById('box');
     var coordinatesDisplay = document.getElementById('coordinates');
+	var coordinatesDisplay1 = document.getElementById('coordinates1');
 
     // Variables to store starting and ending x-coordinates
     var startX = 0;
@@ -37,30 +44,33 @@
 
     // Add event listeners for mouse events
     box.addEventListener('touchstart', function(event) {
-        // Capture starting x-coordinate when touch starts
-        startX = event.touches[0].clientX - window.innerWidth / 2;
+        // Capture starting x-coordinate when mouse button is pressed down
+        startX = event.clientX - window.innerWidth / 2;
     });
 
     box.addEventListener('touchmove', function(event) {
-        // Update ending x-coordinate when touch is moved
-        endX = event.touches[0].clientX - window.innerWidth / 2;
+        // Update ending x-coordinate when mouse is moved
+        endX = event.clientX - window.innerWidth / 2;
 
         // Update coordinates display
         coordinatesDisplay.textContent = 'Start X: ' + startX + ', End X: ' + endX;
 		
-		  
-if (endX > startX) {
-   
-    location.href = "f.html";
-}
-  
-if (endX < startX) {
-   
-   location.href = "index.html";
-}
-
+	if(endX > startX)
+	{
+	coordinatesDisplay1.textContent = endX+'++++++++++++++++';
+	
+	location.href="d.html";
+	}
+	if(endX < startX)
+	{
+	coordinatesDisplay1.textContent = endX+'---------------';
+	location.href="d.html";
+	}
     });
-</script>
+	
+	
+	
+	</script>
 
 </body>
 </html>
